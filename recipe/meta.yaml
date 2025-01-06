@@ -1,27 +1,28 @@
 {% set name = "molpipeline" %}
 {% set version = "0.9.1" %}
+{% set python_min = "3.10" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/molpipeline-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/molpipeline-{{ version }}.tar.gz
   sha256: 973887e74292007adc6f071e997329592cdd24c6f3c6a33be83d616527bee484
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - setuptools
     - pip
   run:
     - typing_extensions
-    - python >=3.7
+    - python >={{ python_min }}
     - joblib >=1.3.0
     - loguru
     - numpy
@@ -39,6 +40,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   summary: Integration of rdkit functionality into sklearn pipelines.
