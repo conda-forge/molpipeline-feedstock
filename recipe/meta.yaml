@@ -1,5 +1,5 @@
 {% set name = "molpipeline" %}
-{% set version = "0.10.0" %}
+{% set version = "0.10.1" %}
 {% set python_min = "3.10" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/molpipeline-{{ version }}.tar.gz
-  sha256: 097e50a3c62a6935592c9461b3020a227aed05922d281e1589821227d884adc7
+  sha256: 17ffcc197493574c928f2527ef465777df3b9f5d8cc797aaa83587e7550b0497
 
 build:
   noarch: python
