@@ -1,5 +1,5 @@
 {% set name = "molpipeline" %}
-{% set version = "0.10.3" %}
+{% set version = "0.11.0" %}
 {% set python_min = "3.10" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/molpipeline-{{ version }}.tar.gz
-  sha256: bcac5f6f9351653549458c7be3877d994af1b7857fc3fcfbdaeb616fb17074a2
+  sha256: f74ff8fda57e990ac32be5ae08d278fc736c1c22617638c136ce385df9e275e8
 
 build:
   noarch: python
@@ -21,6 +21,7 @@ requirements:
     - setuptools
     - pip
   run:
+    - crepes >=0.8.0
     - matplotlib-base >=3.10.1
     - shap >=0.47.1
     - typing_extensions >=4.13.1
