@@ -1,23 +1,26 @@
-{% set name = "molpipeline" %}
-{% set version = "0.13.1" %}
-{% set python_min = "3.11" %}
+schema_version: 1
+
+context:
+  name: molpipeline
+  version: "0.13.1"
+  python_min: "3.11"
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/molpipeline-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/molpipeline-${{ version }}.tar.gz
   sha256: b5579c30761b6ca5899f69f904ff83f9ca117c1035cbb99709f4c8e4278d3da7
 
 build:
+  number: 1
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
-    - python {{ python_min }}
+    - python 3.11.*
     - setuptools
     - pip
   run:
@@ -25,7 +28,7 @@ requirements:
     - matplotlib-base >=3.10.1
     - shap >=0.47.1
     - typing_extensions >=4.13.1
-    - python >={{ python_min }}
+    - python >=${{ python_min }}
     - joblib >=1.3.0
     - loguru >=0.7.3
     - numpy >=1.26.4
@@ -36,20 +39,18 @@ requirements:
     - scikit-learn >=1.8.0
     - typing-extensions
 
-test:
-  imports:
-    - molpipeline
-  commands:
-    - pip check
-  requires:
-    - pip
-    - python {{ python_min }}
+tests:
+  - python:
+      imports:
+        - molpipeline
+      pip_check: true
+      python_version: ${{ python_min }}
 
 about:
   summary: Integration of rdkit functionality into sklearn pipelines.
-  home: https://github.com/basf/MolPipeline
   license: MIT
   license_file: LICENSE
+  homepage: https://github.com/basf/MolPipeline
 
 extra:
   recipe-maintainers:
